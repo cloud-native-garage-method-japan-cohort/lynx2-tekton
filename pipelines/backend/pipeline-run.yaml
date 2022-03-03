@@ -1,0 +1,12 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: lynx2-backend-pipeline-run-
+spec:
+  serviceAccountName: build-bot
+  pipelineRef:
+    name: lynx2-backend-pipeline
+  workspaces:
+    - name: pipeline-shared-data
+      persistentVolumeClaim:
+        claimName: lynx2-pvc
