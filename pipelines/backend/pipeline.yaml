@@ -65,6 +65,8 @@ spec:
       runAfter:
         - build-image
       params:
+        - name: app-name
+          value: "$(params.image-repo)"
         - name: image-with-tag
           value: "$(params.image-repo):$(tasks.clone-repository.results.commit)"
       taskRef:

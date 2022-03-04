@@ -1,17 +1,17 @@
 apiVersion: triggers.tekton.dev/v1alpha1
 kind: EventListener
 metadata:
-  name: lynx2-event-listener
+  name: lynx2-backend-event-listener
 spec:
   serviceAccountName: tekton-triggers-sa
   triggers:
-  - name: lynx2-frontend-deploy
+  - name: lynx2-backend-deploy
     interceptors:
     - github:
         eventTypes: ["push"]
     - cel:
-        filter: "body.repository.name == 'lynx2-frontend' && body.ref.split('/')[2] == 'master'"
+        filter: "body.repository.name == 'lynx2-backend' && body.ref.split('/')[2] == 'master'"
     bindings:
-      - ref: lynx2-trigger-binding
+      - ref: lynx2-backend-trigger-binding
     template:
-      ref: lynx2-trigger-template
+      ref: lynx2-backend-trigger-template
